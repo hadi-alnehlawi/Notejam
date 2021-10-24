@@ -17,7 +17,7 @@ The new application would be containerized to run on `AWS` and use its kubernete
 * DB is configured to set back-up policy 
 # Developing #
 # Preparing #
-Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - `Terraform` 
+Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - `Terraform`. The folder. The file `main.tf` build the following resource on `AWS`:
 # Deployment #
 # Setup CI/CD #
 
