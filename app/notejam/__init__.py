@@ -3,7 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 
+# load the variable from .env file which is going to 
+# exluded in .gitignore
+load_dotenv()
 # @TODO use application factory approach
 app = Flask(__name__)
 app.config.from_object('notejam.config.Config')
