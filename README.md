@@ -16,12 +16,8 @@ The new application would be containerized to run on `AWS` and use its kubernete
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
 * DB is configured to set back-up policy 
 # Developing #
-
-
-
-
-# Designing #
 # Preparing #
+Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - `Terraform` 
 # Deployment #
 # Setup CI/CD #
 
