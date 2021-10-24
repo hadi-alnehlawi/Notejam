@@ -20,7 +20,7 @@ The new application would be containerized to run on AWS and use its kubernetes 
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**:
 ``` 
 cd ./Infrastrcure
-terraform main.tf
+terraform main.tf -var-file variables.tfvars
 ```
 # Deployment #
 # Setup CI/CD #
