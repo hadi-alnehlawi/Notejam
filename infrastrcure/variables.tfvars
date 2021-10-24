@@ -1,2 +1,5 @@
-env=production
-project=Notejam
+env="production"
+project="Notejam"
+aws_region="sa-east-1"
+aws_cred_file="~/.aws/credentials"
+aws_profile="default"
