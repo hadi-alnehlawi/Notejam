@@ -8,8 +8,8 @@ class Config(object):
     WTF_CSRF_ENABLED = True
     CSRF_SESSION_KEY = 'notejam-flask-secret-key'
     sqllite_url = 'sqlite:///' + os.path.join(basedir, 'notejam.db')
-    # postgres_url = "postgresql://postgres:postgres@localhost/postgres"
-    SQLALCHEMY_DATABASE_URI = sqllite_url
+    postgres_url = "postgresql://postgres:postgres@localhost/postgres"
+    SQLALCHEMY_DATABASE_URI = postgres_url
 
 
 class ProductionConfig(Config):
