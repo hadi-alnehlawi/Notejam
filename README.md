@@ -12,6 +12,10 @@ The new application would be containerized to run on `AWS` and use its kubernete
     - Development
     - Staging
     - Production
+* Each cluster is connected to a load balancer `ELB`which in turns direct the connection to the app endpoints
+* Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
+* DB is configured to set back-up policy 
+# Developing #
 
 
 
