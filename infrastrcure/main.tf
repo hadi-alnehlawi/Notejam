@@ -43,6 +43,12 @@ module "vpc" {
   public_subnets   = var.public_subnets
   private_subnets  = var.private_subnets
   database_subnets = var.database_subnets
+  # Sometimes it is handy to have public access to RDS instances (it is not recommended for production)
+  create_database_subnet_group            = true
+  create_database_subnet_route_table      = true
+  create_database_internet_gateway_route  = true
+  enable_dns_hostnames                    = true
+  enable_dns_support                      = true
 }
 
 module "security_group" {
@@ -51,6 +57,7 @@ module "security_group" {
   name        = var.sg_name
   description = "Complete PostgreSQL example security group"
   vpc_id      = module.vpc.vpc_id
+
 
   # ingress
   ingress_with_cidr_blocks = [
@@ -80,12 +87,11 @@ module "rds" {
   password             = var.db_password
   port                 = "5432"
 
-  iam_database_authentication_enabled = true
 
-  # vpc_security_group_ids = ["sg-${var.env}-${random_uuid.uuid.result}"]
+  iam_database_authentication_enabled     = true
+
+
   vpc_security_group_ids = [module.security_group.security_group_id]
-  maintenance_window   = "Mon:00:00-Mon:03:00"
-  backup_window        = "03:00-06:00"
 
   # Enhanced Monitoring - see example for details on how to create the role
   # by yourself, in case you don't want to create it automatically
