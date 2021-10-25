@@ -33,7 +33,11 @@ $ terraform init
 $ terraform plan main.tf -var-file variables.tfvars
 $ terraform apply -var-file variables.tfvars
 ```
-The above commands build the whole infrastrucre which is needed to have the applicaiton up and running.
+The above commands build the whole infrastrucre which is needed to have the applicaiton up and running. The resources are:
+* VPC 
+* RDS - postgres database
+* S3 Bucker - to store the db backup files for 3 years 
+* EKS Clusters - three k8s clusters: developments - staging - produciton
 # Deployment #
 # Setup CI/CD #
 
