@@ -15,7 +15,7 @@ We choose to run the applicaiton on AWS cloud providers for many factors. In my 
 
 # Architecture #
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
-* The applicaiton is now using **PostgreSQL** backend db instead  of SQLite for many reason, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
+* The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
 * Initially the application is running on **AWS EKS** three clusters:
     - Development
     - Staging
@@ -33,6 +33,7 @@ $ terraform init
 $ terraform plan main.tf -var-file variables.tfvars
 $ terraform apply -var-file variables.tfvars
 ```
+The above commands build the whole infrastrucre which is needed to have the applicaiton up and running.
 # Deployment #
 # Setup CI/CD #
 
