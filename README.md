@@ -15,15 +15,15 @@ The project consists of several steps with an acrynom for the first-five English
 4. Deploying
 5. Establishing
 # Architecting #
-The new application would be containerized to run on AWS and use its kubernetes cluster technology _AWS EKS_.
-* The applicaiton is now using ***PostgreSQL*** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
-* Initially the application is running on ***AWS EKS*** three clusters:
+The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
+* The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
+* Initially the application is running on three EKS clusters:
     - Development
     - Staging
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* The DB snapshot data is exported to a S3 called `ntoejam-db-backup` by lambda function to run for example every day.
+* The DB snapshot data is exported to a **S3** bucket called `ntoejam-db-backup` by **lambda function** to run for example every day.
 * This bucket has a lifecyle period for 3 years.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**:
