@@ -41,7 +41,7 @@ The above commands build the whole infrastrucre which is needed to have the appl
 # Creating #
 In this step we are going to dockerize the application to be run on EKS cluster:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
-* Database URL is configured in as environement varaiable as `ENV _database_url_`
+* Database URL is configured in as environement varaiable as `ENV _ database_url _`
 # Deploying #
 # Establishing #
 
