@@ -39,8 +39,8 @@ The above commands build the whole infrastrucre which is needed to have the appl
 * S3 Bucket - to store the db backup files for 3 years 
 * EKS Clusters - three k8s clusters: developments - staging - produciton
 # Creating #
-# Deployment #
-# Establish #
+# Deploying #
+# Establishing #
 
 
 
