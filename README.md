@@ -34,14 +34,14 @@ $ terraform plan main.tf -var-file variables.tfvars
 $ terraform apply -var-file variables.tfvars
 ```
 The above commands build the whole infrastrucre which is needed to have the applicaiton up and running. The resources are:
-* VPC 
+* VPC - virtual private cloud on aws for network backbone
 * RDS - postgres database
 * S3 Bucket - to store the db backup files for 3 years 
 * EKS Clusters - three k8s clusters: developments - staging - produciton
 # Creating #
 In this step we are going to dockerize the application to be run on EKS cluster:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
-* Database URL is configured in as environement varaiable as `ENV database_url`
+* Database URL is configured in as environement varaiable as `ENV _database_url_`
 # Deploying #
 # Establishing #
 
