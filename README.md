@@ -1,6 +1,6 @@
 # Introduction #
 Notejam applicaiton was first created as monolith and this project goal is to re-design it as microservice running on cloud. It would be more scalable, high available and automatically scale up/down with out-of-the-box networking and security integrations.
-## Technology Stack ##
+### Technology Stack ###
 We choose to run the applicaiton on AWS cloud providers for many factors. In my opinion, scalabiltiy and flexibility are the most important factors. In the below a list of AWS services stack:
 * [Docker](https://www.docker.com/): We cannot think of microservice without mentioning docker. The whole concept of construct any microservice application is building it as contianers and the poineer technology to achiver this goal is Docker.
 * [EKS](https://aws.amazon.com/eks/): It is the most trusted way to start, run and scal Kubernetes. At the end we are going to create an application that automatically scale up/down and run in a high availability configuraiotn.
