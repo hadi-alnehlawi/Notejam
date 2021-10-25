@@ -7,4 +7,3 @@ fi
 flask db migrate
 flask db upgrade
 python runserver.py
-
