@@ -24,8 +24,7 @@ The new application would be containerized to run on AWS and use its kubernetes 
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
 * The DB snapshot data is exported to a S3 called `ntoejam-db-backup` by lambda function to run for example every day.
 * This bucket has a lifecyle period for 3 years.
-# Developing #
-# Preparing #
+# Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**:
 ``` 
 $ cd ./infrastrcure
@@ -38,7 +37,10 @@ The above commands build the whole infrastrucre which is needed to have the appl
 * RDS - postgres database
 * S3 Bucket - to store the db backup files for 3 years 
 * EKS Clusters - three k8s clusters: developments - staging - produciton
+# Creating #
 # Deployment #
-# Setup CI/CD #
+# Establish #
+
+
 
 
