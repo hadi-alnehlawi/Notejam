@@ -8,12 +8,12 @@ We choose to run the applicaiton on AWS cloud providers for many factors. In my 
 * [Terraform](https://www.terraform.io/): Instead of provisioning the infrastrucre manually, I used terraform . Defining infrastrcue as code to create resources, manage existing ones, and destroy those no longer needed.
 * [CircleCI](https://circleci.com): Continous Integration / Continous Development (CI/CD) is the most important tool to achive DevOps culture in developement any software. The hot label which could brief the benefit of CI/CD tool is *fail fast and repair fast*. One of the poineer tool is circleci to build a faster deployement jobs on robut cloud servers. Finally, have more than 100 developers to work in this project and who want to roll out multiple deployments a day without interruption / downtime would be impossible without using the CI/CD piplines.
 
-The project consists of several steps with an acrynom for first five English letters **ABCDE**:
-1. Architecture
-2. Developing
-3. Preparing
-4. Deployment
-5. Setup CI/CD
+The project consists of several steps with an acrynom for the first-five English letters **ABCDE**:
+1. Architecting
+2. Building
+3. Creating
+4. Deploying
+5. Establishing
 # Architecture #
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
 * The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
