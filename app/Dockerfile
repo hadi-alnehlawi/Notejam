@@ -4,8 +4,6 @@ LABEL maintainer="HADI ALNEHLAWI nhadi82@hotmail.com"
 COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 RUN python --version
-# RUN python -m pip install --upgrade pip
-# RUN pip install psycopg2-binary
 RUN pip install -r requirements.txt
 COPY . /app
 ENV DATABASE_URI="postgresql://postgres:postgres@localhost/postgres"
