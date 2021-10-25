@@ -39,10 +39,14 @@ The above commands build the whole infrastrucre which is needed to have the appl
 * S3 Bucket - to store the db backup files for 3 years 
 * EKS Clusters - three k8s clusters: developments - staging - produciton
 # Creating #
-In this step we are going to dockerize the application to be run on EKS cluster:
+In this step we are going to dockerize the application to be run on k8s cluster:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
-* Database URL is configured in as environement varaiable as `ENV {database_url}`
-* 
+* Database URL is configured in as environement varaiable as `ENV {database_url}` which created in build step.
+* We can test the container applicaiton by update the `ENV` and the runn the command:
+``` 
+$ docker build -t notejam .
+$ docker run -it  --network host -p 5000  notejam
+```
 # Deploying #
 # Establishing #
 
