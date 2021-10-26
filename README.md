@@ -9,11 +9,11 @@ We choose to run the applicaiton on AWS cloud providers for many factors. In my 
 * [CircleCI](https://circleci.com): Continous Integration / Continous Development (CI/CD) is the most important tool to achive DevOps culture in developement any software. The hot label which could brief the benefit of CI/CD tool is *fail fast and repair fast*. One of the poineer tool is circleci to build a faster deployement jobs on robut cloud servers. Finally, have more than 100 developers to work in this project and who want to roll out multiple deployments a day without interruption / downtime would be impossible without using the CI/CD piplines.
 
 The project consists of several steps with an acrynom for the first-five English letters **ABCDE**:
-1. Architecting
-2. Building
-3. Creating
-4. Deploying
-5. Establishing
+1. **A**rchitecting
+2. **B**uilding
+3. **C**reating
+4. **D**eploying
+5. **E**stablishing
 # Architecting #
 ![Alt text](./infra.jpeg?raw=true "Title")
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
