@@ -15,6 +15,7 @@ The project consists of several steps with an acrynom for the first-five English
 4. Deploying
 5. Establishing
 # Architecting #
+[[./infra.jpeg|Infrastrcure]]
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
 * The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
 * Initially the application is running on three EKS clusters:
@@ -42,12 +43,22 @@ The above commands build the whole infrastrucre which is needed to have the appl
 In this step we are going to dockerize the application to be run on k8s cluster:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
 * Database URL is configured in as environement varaiable as `ENV {database_url}` which created in build step.
-* We can test the container applicaiton by update the `ENV` and the runn the command:
-``` 
-$ docker build -t notejam .
+* We can test the container applicaiton by update the `ENV` and the runn the command
+```
+$ docker build -t notejam . 
 $ docker run -it  --network host -p 5000  notejam
 ```
+* One we successfully build the docker image we need to push into any contianer registery, ex [docker hub](https://hub.docker.com), it will be used to build the deployment in the next step. 
+* Once we have our application up & running this building step would be part of a **Continuous Integation** pipeline
+```
+$ export password="dockerhub_password" && user="dockerhub_username && name="dockerhub_name"
+$ echo "$password" | docker login -u "user" --password-stdin
+$ docker tag notejam $name/notejam:latest
+$ docker push $name/notejam:latest
+```
 # Deploying #
+
+
 # Establishing #
 
 
