@@ -16,7 +16,7 @@ The project consists of several steps with an acrynom for the first-five English
 5. **E**stablishing
 # Architecting #
 Cluster Diagram
-![Alt text](./cluser.jpeg?raw=true "Title")
+![Alt text](./cluster.jpeg?raw=true "Title")
 
 <!-- Backup Diagram
 ![Alt text](./backup.jpeg?raw=true "Title") -->
