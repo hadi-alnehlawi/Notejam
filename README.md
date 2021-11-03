@@ -15,7 +15,11 @@ The project consists of several steps with an acrynom for the first-five English
 4. **D**eploying
 5. **E**stablishing
 # Architecting #
-![Alt text](./infra.jpeg?raw=true "Title")
+Cluster Diagram
+![Alt text](./cluser.jpeg?raw=true "Title")
+
+<!-- Backup Diagram
+![Alt text](./backup.jpeg?raw=true "Title") -->
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
 * The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
 * Initially the application is running on three EKS clusters:
@@ -24,7 +28,8 @@ The new application would be containerized to run on AWS and use its kubernetes 
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* The DB snapshot data is exported to a **S3** bucket called `notejamsnapshot` by **lambda function** to run for example every day, following a [best-practice](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) from aws
+* The DB snapshot data is exported to a **S3** bucket called `notejamsnapshot` by a **lambda function** to run  daily.
+* The snapshot is copied to the s3 bucket by the lambda fucntion following a [best-practice](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) from aws for persisting the RDS snapshot to S3.
 * This bucket has a lifecyle period for 3 years.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
