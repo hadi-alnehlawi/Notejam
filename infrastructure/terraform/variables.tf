@@ -9,11 +9,17 @@ variable "db_name" {}
 variable "project" { default = "Notejam" }
 
 variable "vpc_name" {}
-variable "s3_name" {}
+variable "snapshot_s3_name" {}
 
-variable "s3_role" {}
+variable "lambda_name" {}
 
-variable "s3_policy" {}
+variable "snapshot_s3_role" {}
+
+variable "snapshot_s3_policy" {}
+
+variable "lambda_role" {}
+
+variable "lambda_policy" {}
 
 variable "snapshot_kms" {}
 
