@@ -6,6 +6,6 @@ WORKDIR /app
 RUN python --version
 RUN pip install -r requirements.txt
 COPY . /app
-ENV DATABASE_URI="postgresql://postgres:postgres@localhost/postgres"
+ENV DB_URI="postgresql://postgres:postgres@localhost/postgres"
 EXPOSE 5000
 CMD ["sh", "./entrypoint.sh" ]

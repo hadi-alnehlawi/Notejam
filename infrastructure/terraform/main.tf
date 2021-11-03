@@ -7,6 +7,76 @@ provider "aws" {
   profile                 = var.aws_profile
 }
 
+resource "aws_s3_bucket" "snapshot_s3" {
+  bucket = var.s3_name
+  acl    = "private"
+  tags = {
+    env         = var.env
+    project     = var.project
+  }
+}
+resource "aws_iam_policy" "snapshot_s3_policy" {
+  name        = var.s3_policy
+  path        = "/"
+  description = "it would be used by snapshot to copy into s3"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    "Statement": [
+        {
+            "Sid": "ExportPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject*",
+                "s3:ListBucket",
+                "s3:GetObject*",
+                "s3:DeleteObject*",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${var.s3_name}",
+                "arn:aws:s3:::${var.s3_name}/*"
+            ]
+        }
+    ]
+  })
+}
+resource "aws_iam_role" "snapshot_s3_role" {
+  name = var.s3_role
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+         "Statement": [
+       {
+         "Effect": "Allow",
+         "Principal": {
+            "Service": "export.rds.amazonaws.com"
+          },
+         "Action": "sts:AssumeRole"
+       }
+     ] 
+    }
+    )
+  tags = {
+    project = var.project
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "snapshot_attachement" {
+  role       = aws_iam_role.snapshot_s3_role.name
+  policy_arn = aws_iam_policy.snapshot_s3_policy.arn
+}
+
+resource "aws_kms_key" "snapshot_kms" {
+  description = "WS KMS key for the server-side encryption. The KMS key is used by the snapshot export task" 
+  deletion_window_in_days = 7
+  tags = {
+    project = var.project
+  }
+}
+
+resource "aws_kms_alias" "snaptshot_kms_alias" {
+  name          = "alias/${var.snapshot_kms}"
+  target_key_id = aws_kms_key.snapshot_kms.key_id
+}
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   name = var.vpc_name
@@ -44,50 +114,50 @@ module "security_group" {
 }
 
 
-# module "rds" {
-#   source               = "terraform-aws-modules/rds/aws"
-#   version              = "~> 3.0"
-#   identifier           = "notejamdbinstance"
-#   engine               = "postgres"
-#   engine_version       = "11.10"
-#   family               = "postgres11" # DB parameter group
-#   major_engine_version = "11"         # DB option group
-#   instance_class       = var.db_instance
-#   allocated_storage    = 5
-#   storage_encrypted    = false
-#   name                 = var.db_name
-#   username             = var.db_username
-#   password             = var.db_password
-#   port                 = "5432"
+module "rds" {
+  source               = "terraform-aws-modules/rds/aws"
+  version              = "~> 3.0"
+  identifier           = "notejamdbinstance"
+  engine               = "postgres"
+  engine_version       = "12.2"
+  family               = "postgres12" # DB parameter group
+  major_engine_version = "12"         # DB option group
+  instance_class       = var.db_instance
+  allocated_storage    = 5
+  storage_encrypted    = false
+  name                 = var.db_name
+  username             = var.db_username
+  password             = var.db_password
+  port                 = "5432"
 
-#   iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = true
 
-#   vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.security_group.security_group_id]
 
-#   # in production this must be disable
-#   publicly_accessible = true
+  # in production this must be disable
+  publicly_accessible = true
  
-#   tags = {
-#     project = var.project
-#   }
+  tags = {
+    project = var.project
+  }
 
-#   # DB subnet group
-#   # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
-#   subnet_ids = module.vpc.database_subnets
+  # DB subnet group
+  # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
+  subnet_ids = module.vpc.database_subnets
 
-#   # Database Deletion Protection
-#   deletion_protection     = false
-#   backup_retention_period = 0
-#   skip_final_snapshot     = true
+  # Database Deletion Protection
+  deletion_protection     = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
 
-#   parameters = [
-#       {
-#         name  = "autovacuum"
-#         value = 1
-#       },
-#       {
-#         name  = "client_encoding"
-#         value = "utf8"
-#       }
-#     ]
-# }
+  parameters = [
+      {
+        name  = "autovacuum"
+        value = 1
+      },
+      {
+        name  = "client_encoding"
+        value = "utf8"
+      }
+    ]
+}

@@ -24,17 +24,20 @@ The new application would be containerized to run on AWS and use its kubernetes 
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* The DB snapshot data is exported to a **S3** bucket called `ntoejam-db-backup` by **lambda function** to run for example every day.
+* The DB snapshot data is exported to a **S3** bucket called `notejamsnapshot` by **lambda function** to run for example every day, following a [best-practice](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) from aws
 * This bucket has a lifecyle period for 3 years.
 # Building #
-Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**:
+Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
+Before run we need to create a vairable file and map the its value:
 ``` 
-$ cd ./infrastrcure
+$ cd ./infrastrcure/terraform
+$ touch variables.tfvars
+$ ## fill the values identified from the file variables.tf
 $ terraform init
-$ terraform plan main.tf -var-file variables.tfvars
-$ terraform apply -var-file variables.tfvars
+$ terraform plan -var-file variables.tfvars
+$ terraform apply -auto-approve -var-file variables.tfvars
 ```
-The above commands build the whole infrastrucre which is needed to have the applicaiton up and running. The resources are:
+The above commands build the whole infrastructure which is needed to have the applicaiton up and running. The resources are:
 * VPC - virtual private cloud on aws for network backbone
 * RDS - postgres database
 * S3 Bucket - to store the db backup files for 3 years 
@@ -42,16 +45,20 @@ The above commands build the whole infrastrucre which is needed to have the appl
 # Creating #
 In this step we are going to dockerize the application to be run on k8s cluster:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
-* Database URL is configured in as environement varaiable as `ENV {database_url}` which created in build step.
+* Database URL is configured in as environement varaiable as `ENV {DB_URI}` which created in build step.
 * We can test the container applicaiton by update the `ENV` and the runn the command
 ```
+$ cd app
+$ export POSTGRES_HOST=your_aws_rds_uri
+$ export DB_URI="postgresql://postgres:postgres@$POSTGRES_HOST/postgres"
+$EXPOSE 5000
 $ docker build -t notejam . 
-$ docker run -it  --network host -p 5000  notejam
+$ docker run -it  --network host -p 5000 -e DB_URI=$DB_URI notejam
 ```
 * One we successfully build the docker image we need to push into any contianer registery, ex [docker hub](https://hub.docker.com), it will be used to build the deployment in the next step. 
 * Once we have our application up & running this building step would be part of a **Continuous Integation** pipeline
 ```
-$ export password="dockerhub_password" && user="dockerhub_username && name="dockerhub_name"
+$ export password="dockerhub_password" && user="dockerhub_username" && name="dockerhub_name"
 $ echo "$password" | docker login -u "user" --password-stdin
 $ docker tag notejam $name/notejam:latest
 $ docker push $name/notejam:latest
