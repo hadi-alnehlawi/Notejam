@@ -28,8 +28,8 @@ The new application would be containerized to run on AWS and use its kubernetes 
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* The DB snapshot data is exported to a **S3** bucket called `notejamsnapshot` by a **lambda function** to run  daily.
-* The snapshot is copied to the s3 bucket by the lambda fucntion following a [best-practice](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) from aws for persisting the RDS snapshot to S3.
+* A **lambda function** is triggered by a **Cloud Watch** on a specific time (ex. daily) to create a snapshot of the database.
+* Once the sanpshort is created, another lambda function is triggerd as well by cloud watch to export it to a **S3 bucket** called `notejamsnapshot`. A [best-practice](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) from aws for persisting the RDS snapshot to S3.
 * This bucket has a lifecyle period for 3 years.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
@@ -56,7 +56,6 @@ In this step we are going to dockerize the application to be run on k8s cluster:
 $ cd app
 $ export POSTGRES_HOST=your_aws_rds_uri
 $ export DB_URI="postgresql://postgres:postgres@$POSTGRES_HOST/postgres"
-$EXPOSE 5000
 $ docker build -t notejam . 
 $ docker run -it  --network host -p 5000 -e DB_URI=$DB_URI notejam
 ```
