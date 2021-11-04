@@ -35,8 +35,15 @@ The new application would be containerized to run on AWS and use its kubernetes 
 * This bucket has a lifecyle period for 3 years.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
-Before run we need to create a vairable file and map the its value:
+Before run we need to create a vairable file and map the its value. In additional to Terraform , we need a tool called [eksctl](https://eksctl.io/) which is going to be used to create kubernete cluster on aws easily and fast:
+
+**EKS Clustser**
+```
+$ eksctl create -f ./infrastructure/eks/cluster.yaml
+$ eksctl get clusters
 ``` 
+
+**AWS Resources**
 $ cd ./infrastrcure/terraform
 $ touch variables.tfvars
 $ ## fill the values identified from the file variables.tf
@@ -59,8 +66,8 @@ This building step would be part of a **Continuous Integation** pipeline. We are
 $ cd app
 $ export POSTGRES_HOST=your_aws_rds_uri
 $ export DB_URI="postgresql://postgres:postgres@$POSTGRES_HOST/postgres"
-$ docker build -t notejam . 
-$ docker run -it  --network host -p 5000 -e DB_URI=$DB_URI notejam
+$ docker build -t notejam .
+$ docker run -it --network host -p 5000 -e DB_URI=$DB_URI notejam
 ```
 * One we successfully build the docker image we need to push into any contianer registery, ex [docker hub](https://hub.docker.com), it will be used to build the deployment in the next step. 
 * There is a possibility to use any other regstier other than dockerhub. ex: [ECS](https://aws.amazon.com/ecr/).
