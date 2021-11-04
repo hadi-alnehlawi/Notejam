@@ -28,8 +28,8 @@ The new application would be containerized to run on AWS and use its kubernetes 
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* A **lambda function** is triggered by a **Cloud Watch** on a specific time (ex. daily) to create a snapshot of the database.
-* Once the sanpshort is created, another lambda function is triggerd as well by cloud watch to export it to a **S3 bucket** called `notejamsnapshot`.
+* A **lambda function** is triggered by a **EventBridge** on a specific time (ex. daily) to create a snapshot of the database.
+* Once the sanpshort is created, another lambda function is triggerd as well by EventBridge and export it to a **S3 bucket** called `notejamsnapshot`.
 * This bucket has a lifecyle period for 3 years.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**

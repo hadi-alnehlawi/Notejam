@@ -13,10 +13,10 @@ const rds = new AWS.RDS(rdsConfig);
 exports.handler = (event, context, callback) => {
 
   const currentDate = new Date();
-  
+  let rds_inctance = process.env.RDS_INSTANCE
   const params = {
-      DBInstanceIdentifier: 'my-db', /* DB instance name */
-      DBSnapshotIdentifier: `my-db-${currentDate.toDateString().replace(/\s+/g, '-').toLowerCase()}-snapshot-manual-by-lamda`, /* DB Snapshot name */
+      DBInstanceIdentifier: rds_inctance, /* DB instance name */
+      DBSnapshotIdentifier: `${rds_inctance}-${currentDate.toDateString().replace(/\s+/g, '-').toLowerCase()}-snapshot-manual-by-lamda`, /* DB Snapshot name */
     };
 
   rds.createDBSnapshot(params, function(err, data) {

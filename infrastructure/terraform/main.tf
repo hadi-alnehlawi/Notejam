@@ -118,15 +118,7 @@ resource "aws_iam_role_policy_attachment" "lambda_attachement" {
   policy_arn = aws_iam_policy.lambda_policy.arn
 }
 
-# Lambda Function
-resource "aws_lambda_function" "snapshot_lambda" {
-  filename      = "snapshot.zip"
-  source_code_hash = filebase64sha256("snapshot.zip")
-  function_name = "snapshot"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "snapshot.handler"
-  runtime = "nodejs12.x"
-}
+
 
 # KMS
 resource "aws_kms_key" "snapshot_kms" {
@@ -179,51 +171,67 @@ module "security_group" {
   ]
 }
 
-## RDS - Postgres DB
-# module "rds" {
-#   source               = "terraform-aws-modules/rds/aws"
-#   version              = "~> 3.0"
-#   identifier           = "notejamdbinstance"
-#   engine               = "postgres"
-#   engine_version       = "12.2"
-#   family               = "postgres12" # DB parameter group
-#   major_engine_version = "12"         # DB option group
-#   instance_class       = var.db_instance
-#   allocated_storage    = 5
-#   storage_encrypted    = false
-#   name                 = var.db_name
-#   username             = var.db_username
-#   password             = var.db_password
-#   port                 = "5432"
+# Lambda Function for Snapshot
+resource "aws_lambda_function" "snapshot_lambda" {
+  filename      = "snapshot.zip"
+  source_code_hash = filebase64sha256("snapshot.zip")
+  function_name = "snapshot"
+  role          = aws_iam_role.lambda_role.arn
+  handler       = "snapshot.handler"
+  runtime = "nodejs12.x"
+  # get the rds instance id and assign to lambda env variable
+  environment {
+    variables = {
+      RDS_INSTANCE = module.rds.db_instance_id
+    }
+  }
+}
 
-#   iam_database_authentication_enabled = true
+# RDS - Postgres DB
+module "rds" {
+  source               = "terraform-aws-modules/rds/aws"
+  version              = "~> 3.0"
+  identifier           = "notejamdbinstance"
+  engine               = "postgres"
+  engine_version       = "12.2"
+  family               = "postgres12" # DB parameter group
+  major_engine_version = "12"         # DB option group
+  instance_class       = var.db_instance
+  allocated_storage    = 5
+  storage_encrypted    = false
+  name                 = var.db_name
+  username             = var.db_username
+  password             = var.db_password
+  port                 = "5432"
 
-#   vpc_security_group_ids = [module.security_group.security_group_id]
+  iam_database_authentication_enabled = true
 
-#   # in production this must be disable
-#   publicly_accessible = true
+  vpc_security_group_ids = [module.security_group.security_group_id]
+
+  # in production this must be disable
+  publicly_accessible = true
  
-#   tags = {
-#     project = var.project
-#   }
+  tags = {
+    project = var.project
+  }
 
-#   # DB subnet group
-#   # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
-#   subnet_ids = module.vpc.database_subnets
+  # DB subnet group
+  # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
+  subnet_ids = module.vpc.database_subnets
 
-#   # Database Deletion Protection
-#   deletion_protection     = false
-#   backup_retention_period = 0
-#   skip_final_snapshot     = true
+  # Database Deletion Protection
+  deletion_protection     = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
 
-#   parameters = [
-#       {
-#         name  = "autovacuum"
-#         value = 1
-#       },
-#       {
-#         name  = "client_encoding"
-#         value = "utf8"
-#       }
-#     ]
-# }
+  parameters = [
+      {
+        name  = "autovacuum"
+        value = 1
+      },
+      {
+        name  = "client_encoding"
+        value = "utf8"
+      }
+    ]
+}
