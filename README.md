@@ -44,6 +44,7 @@ $ eksctl get clusters
 ``` 
 
 **AWS Resources**
+```
 $ cd ./infrastrcure/terraform
 $ touch variables.tfvars
 $ ## fill the values identified from the file variables.tf
