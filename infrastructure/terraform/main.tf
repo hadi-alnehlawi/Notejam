@@ -180,8 +180,8 @@ resource "aws_lambda_function" "snapshot_lambda" {
   # get the rds instance id and assign to lambda env variable
   environment {
     variables = {
-      # RDS_INSTANCE = module.rds.db_instance_id
-      RDS_INSTANCE = "HHHHH"
+      RDS_INSTANCE = module.rds.db_instance_id
+      # RDS_INSTANCE = "HHHHH"
     }
   }
 }
@@ -190,7 +190,7 @@ resource "aws_lambda_function" "snapshot_lambda" {
 resource "aws_cloudwatch_event_rule" "snaptshot_rule" {
     name = "snaptshot_rule"
     description = "Fires every day"
-    #  Daily at 12 AM UTC: cron(0 0 ? * * *)
+    #  Daily at 12 AM UTC
     schedule_expression = "cron(0 0 * * ? *)" 
 }
 
@@ -207,51 +207,52 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_snapshot" {
     principal = "events.amazonaws.com"
     source_arn = "${aws_cloudwatch_event_rule.snaptshot_rule.arn}"
 }
+
 # RDS - Postgres DB
-# module "rds" {
-#   source               = "terraform-aws-modules/rds/aws"
-#   version              = "~> 3.0"
-#   identifier           = "notejamdbinstance"
-#   engine               = "postgres"
-#   engine_version       = "12.2"
-#   family               = "postgres12" # DB parameter group
-#   major_engine_version = "12"         # DB option group
-#   instance_class       = var.db_instance
-#   allocated_storage    = 5
-#   storage_encrypted    = false
-#   name                 = var.db_name
-#   username             = var.db_username
-#   password             = var.db_password
-#   port                 = "5432"
+module "rds" {
+  source               = "terraform-aws-modules/rds/aws"
+  version              = "~> 3.0"
+  identifier           = "notejamdbinstance"
+  engine               = "postgres"
+  engine_version       = "12.2"
+  family               = "postgres12" # DB parameter group
+  major_engine_version = "12"         # DB option group
+  instance_class       = var.db_instance
+  allocated_storage    = 5
+  storage_encrypted    = false
+  name                 = var.db_name
+  username             = var.db_username
+  password             = var.db_password
+  port                 = "5432"
 
-#   iam_database_authentication_enabled = true
+  iam_database_authentication_enabled = true
 
-#   vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.security_group.security_group_id]
 
-#   # in production this must be disable
-#   publicly_accessible = true
+  # in production this must be disable
+  publicly_accessible = true
  
-#   tags = {
-#     project = var.project
-#   }
+  tags = {
+    project = var.project
+  }
 
-#   # DB subnet group
-#   # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
-#   subnet_ids = module.vpc.database_subnets
+  # DB subnet group
+  # subnet_ids = ["subnet1-${var.env}-${random_uuid.uuid.result}", "subnet2-${var.env}-${random_uuid.uuid.result}"]
+  subnet_ids = module.vpc.database_subnets
 
-#   # Database Deletion Protection
-#   deletion_protection     = false
-#   backup_retention_period = 0
-#   skip_final_snapshot     = true
+  # Database Deletion Protection
+  deletion_protection     = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
 
-#   parameters = [
-#       {
-#         name  = "autovacuum"
-#         value = 1
-#       },
-#       {
-#         name  = "client_encoding"
-#         value = "utf8"
-#       }
-#     ]
-# }
+  parameters = [
+      {
+        name  = "autovacuum"
+        value = 1
+      },
+      {
+        name  = "client_encoding"
+        value = "utf8"
+      }
+    ]
+}
