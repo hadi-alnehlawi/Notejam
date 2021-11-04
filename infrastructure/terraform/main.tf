@@ -266,14 +266,3 @@ module "rds" {
       }
     ]
 }
-
-
-
-
-
-# aws rds start-export-task \
-#     --export-task-identifier my-snapshot-export \
-#     --source-arn arn:aws:rds:sa-east-1:123456789012:snapshot:notejamdbinstance-thu-nov-04-2021-snapshot-manual-by-lamda \
-#     --s3-bucket-name notejamsnapshot-bfb26bcd-cf00-a9f2-6002-a3fa713f6923 \
-#     --iam-role-arn arn:aws:iam::891905055664:role/service-role/lambdakinesisfirehostds-role-16w988ua \
-#     --kms-key-id 41c5224d-702c-4efc-94d1-636d396c702b
