@@ -12,6 +12,17 @@ provider "aws" {
 resource "aws_s3_bucket" "snapshot_s3" {
   bucket = "${var.snapshot_s3_name}-${random_uuid.uuid.result}"
   acl    = "private"
+  lifecycle_rule {
+    id      = "deletelifecycle"
+    enabled = true
+    expiration {
+      # three years in days
+      days = 1095
+    }
+    noncurrent_version_expiration {
+      days = 1095
+    }
+  }
   tags = {
     env         = var.env
     project     = var.project
@@ -171,8 +182,8 @@ module "security_group" {
 
 # Lambda Function for Snapshot
 resource "aws_lambda_function" "snapshot_lambda" {
-  filename      = "snapshot.zip"
-  source_code_hash = filebase64sha256("snapshot.zip")
+  filename      = "./lambda/snapshot.zip"
+  source_code_hash = filebase64sha256("./lambda/snapshot.zip")
   function_name = "snapshot"
   role          = aws_iam_role.lambda_role.arn
   handler       = "snapshot.handler"
@@ -181,7 +192,6 @@ resource "aws_lambda_function" "snapshot_lambda" {
   environment {
     variables = {
       RDS_INSTANCE = module.rds.db_instance_id
-      # RDS_INSTANCE = "HHHHH"
     }
   }
 }
@@ -256,3 +266,14 @@ module "rds" {
       }
     ]
 }
+
+
+
+
+
+# aws rds start-export-task \
+#     --export-task-identifier my-snapshot-export \
+#     --source-arn arn:aws:rds:sa-east-1:123456789012:snapshot:notejamdbinstance-thu-nov-04-2021-snapshot-manual-by-lamda \
+#     --s3-bucket-name notejamsnapshot-bfb26bcd-cf00-a9f2-6002-a3fa713f6923 \
+#     --iam-role-arn arn:aws:iam::891905055664:role/service-role/lambdakinesisfirehostds-role-16w988ua \
+#     --kms-key-id 41c5224d-702c-4efc-94d1-636d396c702b
