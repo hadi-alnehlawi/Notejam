@@ -39,13 +39,14 @@ Before run we need to create a vairable file and map the its value. In additiona
 
 **EKS Clustsers**
 ```
-$ # development
+$ ## development
 $ eksctl create -f ./infrastructure/eks/cluster-development.yaml
-$ # staging
+$ ## staging
 $ eksctl create -f ./infrastructure/eks/cluster-staging.yaml
-$ # proudciton
+$ ## proudciton
 $ eksctl create -f ./infrastructure/eks/cluster-production.yaml
-$ eksctl get clusters
+$ ## list clusters 
+eksctl get clusters
 ``` 
 
 **AWS Resources**
