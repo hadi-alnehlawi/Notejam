@@ -46,7 +46,7 @@ $ eksctl create -f ./infrastructure/eks/cluster-staging.yaml
 $ ## proudciton
 $ eksctl create -f ./infrastructure/eks/cluster-production.yaml
 $ ## list clusters 
-eksctl get clusters
+$ eksctl get clusters
 ``` 
 
 **AWS Resources**
