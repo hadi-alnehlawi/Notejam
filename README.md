@@ -37,7 +37,7 @@ The new application would be containerized to run on AWS and use its kubernetes 
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
 Before run we need to create a vairable file and map the its value. In additional to Terraform , we need a tool called [eksctl](https://eksctl.io/) which is going to be used to create kubernete cluster on aws easily and fast:
 
-**EKS Clustser**
+**EKS Clustsers**
 ```
 $ # development
 $ eksctl create -f ./infrastructure/eks/cluster-development.yaml
