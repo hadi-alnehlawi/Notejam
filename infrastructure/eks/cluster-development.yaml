@@ -1,0 +1,15 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: notejam-development
+  region: sa-east-1
+  version: "1.21"
+
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 1
+  instanceType: t3.micro
+  ssh:
+    publicKeyName: notejam
