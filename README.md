@@ -99,7 +99,6 @@ $ kubectl get deployments
 ```
 * Repeat the same commnad for each cluster **staging** and **development**.
 ### Autoscale HPA & CA ###
-```
 * Deploy Metric Server which will drive the scalling behavior of the deploymenets.
 ```
 $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
