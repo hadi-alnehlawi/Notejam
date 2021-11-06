@@ -10,6 +10,6 @@ metadata:
 managedNodeGroups:
 - name: nodegroup
   desiredCapacity: 3
-  instanceType: t3.micro
+  instanceType: t3.small
   ssh:
     publicKeyName: notejam
