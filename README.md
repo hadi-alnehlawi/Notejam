@@ -95,17 +95,21 @@ This building step would be part of a **Continuous Deployment** pipeline.
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
 ```
 $ helm install notejamhelm ./deployment/notejamhelm
-$ kubectl get deployments 
-## NAME      READY   UP-TO-DATE   AVAILABLE   AGE
-## notejam   1/1     1            1           4m24s
+$ kubectl get deployments
 ```
 * Repeat the same commnad for each cluster **staging** and **development**.
 ### Autoscale HPA & CA ###
 ```
+* Deploy Metric Server which will drive the scalling behavior of the deploymenets.
+```
+$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
+
+* Scale up the deployment when cpu exceed some thredshold , ex 70% cpu utilization, with 4 time limits of the normal operation capacity. So if 3 replica considers as the normal operation load, then 12 would be the max limit.
+```
 $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --cpu-percent=50 \
     --min=3 `#The lower limit for the number of pods that can be set by the autoscaler` \
-    --max=10 `#The upper limit for the number of pods that can be set by the autoscaler`
+    --max=12 `#The upper limit for the number of pods that can be set by the autoscaler`
 ```
 
 # Establishing #
