@@ -121,8 +121,11 @@ $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
 ```
 * Becauase EC2 instances has to speak with the autoscaller group, It needs some IAM scurity roles to call aws api and that is explained in [URL](https://www.eksworkshop.com/beginner/080_scaling/deploy_ca/).
 
-### HPA & CA ###
-* 
+### Monitoring ###
+* Prometheus would help us to view the raw metrics collected by the the k8s metric server.
+```
+$ kubectl get --raw /metrics
+```
 
 # Establishing #
 
