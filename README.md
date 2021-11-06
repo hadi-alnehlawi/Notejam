@@ -100,7 +100,7 @@ $ kubectl get deployments
 ## notejam   1/1     1            1           4m24s
 ```
 * Repeat the same commnad for each cluster **staging** and **development**.
-### Auto Scale ###
+### Autoscale HPA & CA ###
 ```
 $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --cpu-percent=50 \
