@@ -91,7 +91,7 @@ $ docker push $name/notejam:latest
 ```
 # Deploying #
 This building step would be part of a **Continuous Deployment** pipeline.
-## Application ##
+### Application ###
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
 ```
 $ helm install notejamhelm ./deployment/notejamhelm
@@ -100,7 +100,7 @@ $ kubectl get deployments
 ## notejam   1/1     1            1           4m24s
 ```
 * Repeat the same commnad for each cluster **staging** and **development**.
-## Auto Scale ##
+### Auto Scale ###
 ```
 $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --cpu-percent=50 \
