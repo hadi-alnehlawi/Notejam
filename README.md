@@ -42,7 +42,7 @@ events and conferences the traffic could be 4 times more than typical.
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
 Before run we need to create a vairable file and map the its value. In additional to Terraform , we need a tool called [eksctl](https://eksctl.io/) which is going to be used to create kubernete cluster on aws easily and fast:
 
-**EKS Clustsers**
+### EKS Clustsers ###
 ```
 $ ## development
 $ eksctl create -f ./infrastructure/eks/cluster-development.yaml
@@ -54,7 +54,7 @@ $ ## list clusters
 $ eksctl get clusters
 ``` 
 
-**AWS Resources**
+### AWS Resources ###
 ```
 $ cd ./infrastrcure/terraform
 $ touch variables.tfvars
