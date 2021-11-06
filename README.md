@@ -30,8 +30,8 @@ The new application would be containerized to run on AWS and use its kubernetes 
     - Production
 * Each cluster is connected to a load balancer **AWS ELB** which in turns direct the connection to the app endpoints.
 * To achive the goal of high availability of the application during the peek and hight load times, two concepts of scalling has been implmented on the deployments:
-    - Horizaonla Pod Autoscaler: increase the number of replicas of the pods based on the resource utilizations.
-    - Cluster Autosclaer: automatically adjust the size of K8S clusters so all pods can scale and run successfully on its nodes.
+    - Horizaonla Pod Autoscaler **HPA**: increase the number of replicas of the pods based on the resource utilizations.
+    - Cluster Autoscler **CA**: automatically adjust the size of K8S clusters so all pods can scale and run successfully on its nodes.
 The Application must serve variable amount of traffic. Most users are active during business hours. During big
 events and conferences the traffic could be 4 times more than typical.
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
