@@ -126,6 +126,18 @@ $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
 ```
 $ kubectl get --raw /metrics
 ```
+* Create a new namespace.
+```
+$ kubectl create namespace prometheus
+
+```
+* Deploy Prometheus by using the helm chart.
+```
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+$ helm upgrade -i prometheus prometheus-community/prometheus \
+    --namespace prometheus \
+    --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"
+```
 
 # Establishing #
 
