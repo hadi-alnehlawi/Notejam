@@ -13,7 +13,7 @@ app:
   port: 5000
   replica: 3
   name: notejam
-  db_uri: 
+  db_uri: postgresql://postgres:postgres@localhost:5432/postgres
 
 service:
   name: notejamsvc
