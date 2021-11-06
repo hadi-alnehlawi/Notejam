@@ -103,6 +103,7 @@ $ kubectl get deployments
 * Deploy Metric Server which will drive the scalling behavior of the deploymenets.
 ```
 $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
+```
 
 * Scale up the deployment when cpu exceed some thredshold , ex 70% cpu utilization, with 4 time limits of the normal operation capacity. So if 3 replica considers as the normal operation load, then 12 would be the max limit.
 ```
