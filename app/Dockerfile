@@ -7,6 +7,6 @@ RUN python --version
 RUN pip install -r requirements.txt
 COPY . /app
 RUN pip install Flask gunicorn
-ENV DB_URI="postgresql://postgres:postgres@localhost/postgres"
+ENV DB_URI="postgresql://postgres:postgres@localhost:5432/postgres"
 EXPOSE 5000
 CMD ["sh", "./entrypoint.sh" ]

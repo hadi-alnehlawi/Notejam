@@ -28,6 +28,9 @@ spec:
         #     path: /health
         #     port: {{ .Values.app.port }}
         imagePullPolicy: Always
+        env:
+          - name: DB_URI
+            value: "{{.Values.app.DB_URI}}"
         ports:
         - containerPort:  {{ .Values.app.port }}
           protocol: TCP

@@ -13,6 +13,7 @@ app:
   port: 5000
   replica: 3
   name: notejam
+  db_uri: 
 
 service:
   name: notejamsvc
