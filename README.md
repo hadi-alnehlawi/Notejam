@@ -8,7 +8,8 @@ We choose to run the applicaiton on AWS cloud providers for many factors. In my 
 * [Lambda](https://aws.amazon.com/lambda): Two Amazon Lambda functions are used to execute servlesss jobs. First one to take a manual snap shot of the database and the second one to export the snapt shot into S3bucket.
 * [S3 Bucket](https://aws.amazon.com/s3): Storing the db snapeshot for three years and set an autoamtic cleanup policy to delete overdue objects. 
 * [Terraform](https://www.terraform.io/): Instead of provisioning the infrastrucre manually, I used terraform . Defining infrastrcue as code to create resources, manage existing ones, and destroy those no longer needed.
-* [CircleCI](https://circleci.com): Continous Integration / Continous Development (CI/CD) is the most important tool to achive DevOps culture in developement any software. The hot label which could brief the benefit of CI/CD tool is *fail fast and repair fast*. One of the poineer tool is circleci to build a faster deployement jobs on robut cloud servers. Finally, have more than 100 developers to work in this project and who want to roll out multiple deployments a day without interruption / downtime would be impossible without using the CI/CD piplines.
+* [Prometheus](https://prometheus.io/): A monitoring system to records real-time metrics.
+* [CircleCI](https://circleci.com): Continous Integration / Continous Development (CI/CD) is the most important tool to achive DevOps culture in delivering any software. The hot label which could brief the benefit of CI/CD tool is *fail fast and repair fast*. One of the poineer tool is circleci to build a faster deployement jobs on robut cloud servers. Finally, have more than 100 developers to work in this project and who want to roll out multiple deployments a day without interruption / downtime would be impossible without using the CI/CD piplines.
 
 The project consists of several steps with an acrynom for the first-five English letters **ABCDE**:
 1. **A**rchitecting
@@ -119,6 +120,9 @@ $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --max=12 `#The upper limit for the number of pods that can be set by the autoscaler`
 ```
 * Becauase EC2 instances has to speak with the autoscaller group, It needs some IAM scurity roles to call aws api and that is explained in [URL](https://www.eksworkshop.com/beginner/080_scaling/deploy_ca/).
+
+### HPA & CA ###
+* 
 
 # Establishing #
 
