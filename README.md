@@ -91,7 +91,7 @@ $ docker push $name/notejam:latest
 ```
 # Deploying #
 This building step would be part of a **Continuous Deployment** pipeline.
-### Application ###
+### Apps ###
 * Before deploy our custom helm chart, It is required to set the values
 ```
 $ cat ./deployment/notejamhelm/values.yaml
@@ -104,12 +104,13 @@ $ helm install notejamhelm ./deployment/notejamhelm
 $ kubectl get deployments
 ```
 * Repeat the same commnads for each cluster **staging** and **development**, taking into consideration changing the values parameter of the helm chart.
-### Autoscale HPA & CA ###
+### HPA & CA ###
 * Deploy Metric Server which will drive the scalling behavior of the deploymenets.
 ```
-$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
+<!-- $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml -->
+$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+$ kubectl get deployment metrics-server -n kube-system
 ```
-
 * Scale up the deployment when cpu exceeds some thredshold , ex 70% cpu utilization, with 4 time limits of the normal operation capacity. So if 3 replica considers as the normal operation load, then 12 would be the max limit.
 ```
 $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
