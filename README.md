@@ -112,7 +112,7 @@ $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --max=12 `#The upper limit for the number of pods that can be set by the autoscaler`
 ```
 * Becauase EC2 instances has to speak with the autoscaller group, It needs some IAM scurity roles to call aws api:
-That's explains in [url](https://www.eksworkshop.com/beginner/080_scaling/deploy_ca/).
+That's explained in [URL](https://www.eksworkshop.com/beginner/080_scaling/deploy_ca/).
 
 # Establishing #
 
