@@ -104,13 +104,15 @@ $ kubectl get deployments
 $ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
 ```
 
-* Scale up the deployment when cpu exceed some thredshold , ex 70% cpu utilization, with 4 time limits of the normal operation capacity. So if 3 replica considers as the normal operation load, then 12 would be the max limit.
+* Scale up the deployment when cpu exceeds some thredshold , ex 70% cpu utilization, with 4 time limits of the normal operation capacity. So if 3 replica considers as the normal operation load, then 12 would be the max limit.
 ```
 $ kubectl autoscale deployment notejam `#The target average CPU utilization` \
     --cpu-percent=50 \
     --min=3 `#The lower limit for the number of pods that can be set by the autoscaler` \
     --max=12 `#The upper limit for the number of pods that can be set by the autoscaler`
 ```
+* Becauase EC2 instances has to speak with the autoscaller group, It needs some IAM scurity roles to call aws api:
+That's explains in [url](https://www.eksworkshop.com/beginner/080_scaling/deploy_ca/).
 
 # Establishing #
 
