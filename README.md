@@ -90,6 +90,7 @@ $ docker tag notejam $name/notejam:latest
 $ docker push $name/notejam:latest
 ```
 # Deploying #
+This building step would be part of a **Continuous Deployment** pipeline.
 ## Application ##
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
 ```
