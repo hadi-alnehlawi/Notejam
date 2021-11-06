@@ -95,15 +95,15 @@ This building step would be part of a **Continuous Deployment** pipeline.
 * Before deploy our custom helm chart, It is required to set the values
 ```
 $ cat ./deployment/notejamhelm/values.yaml
-$ ## db_uri: The postgre database url which is created in [Creating] step earlier.
-$ ## replica: the number of pod replica which is going to be different from environment to another. ex: production:3 , developement:1
+$ ## db_uri: The postgre database url which is created in [Creating] step earlier
+$ ## replica: the numbers of pod replica which is going to be different from environment to another. ex: production:3 , developement:1
 ```
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
 ```
 $ helm install notejamhelm ./deployment/notejamhelm
 $ kubectl get deployments
 ```
-* Repeat the same commnad for each cluster **staging** and **development**.
+* Repeat the same commnads for each cluster **staging** and **development**, taking into consideration changing the values parameter of the helm chart.
 ### Autoscale HPA & CA ###
 * Deploy Metric Server which will drive the scalling behavior of the deploymenets.
 ```
