@@ -146,7 +146,13 @@ $ kubectl get pods -n prometheus
 ```
 
 # Establishing #
-
+As a last step of this project we need to set up the CI/CD system (CircleCI) which is going to define the below steps:
+* Build: create the docker image
+* Test
+* Release
+* Deploy
+* Promote
+* Verify
 
 
 
