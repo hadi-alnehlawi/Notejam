@@ -107,7 +107,7 @@ $ ## replica: the numbers of pod replica which is going to be different from env
 ```
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
 ```
-$ helm install notejamhelm ./deployment/notejamhelm
+$ helm install notejamhelm ./deployment/notejamhelm/.
 $ kubectl get deployments
 ```
 * Repeat the same commnads for each cluster **staging** and **development**, taking into consideration changing the values parameter of the helm chart.
