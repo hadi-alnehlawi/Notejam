@@ -20,12 +20,8 @@ The project consists of several steps with an acrynom for the first-five English
 # Architecting #
 Cluster
 ![Alt text](./cluster.jpeg?raw=true "Title")
-
-
 Database Backup
 ![Alt text](./backup.jpeg?raw=true "Title")
-
-
 CICD Pipline
 ![Alt text](./cicd.jpeg?raw=true "Title")
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
