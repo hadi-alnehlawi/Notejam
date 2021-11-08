@@ -44,6 +44,7 @@ events and conferences the traffic could be 4 times more than typical.
 * A **lambda function** is triggered by a **EventBridge** on a specific time (Daily at 12 AM UTC) to create a snapshot of the database.
 * Once the sanpshort is created, another lambda function is triggerd as well by EventBridge and export it to a **S3 bucket** called `notejamsnapshot`.
 * This bucket has a lifecyle period for 3 years.
+* Prometheus service is installed on the cluster to aggregate the metrics about the kubernetes and the infrastrcure.
 # Building #
 Building the infrastrcure is happening in an automated way using infrastrucre as code software tool - **Terraform**
 Before run we need to create a vairable file and map the its value. In additional to Terraform , we need a tool called [eksctl](https://eksctl.io/) which is going to be used to create kubernete cluster on aws easily and fast:
