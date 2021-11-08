@@ -88,7 +88,7 @@ $ export DB_NAME=your_aws_rds_name
 $ docker build -t notejam .
 $ docker run -it --network host -p 5000 -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_HOST=$DB_HOST -e DB_PORT=$DB_PORT -e DB_NAME=$DB_NAME notejam
 ```
-* One we successfully build the docker image we need to push into any contianer registery, ex [docker hub](https://hub.docker.com), it will be used to build the deployment in the next step. 
+* One we successfully build the docker image, we need to push into any contianer registery, ex [docker hub](https://hub.docker.com), it will be used to build the deployment in the next step. 
 * There is a possibility to use any other regstier other than dockerhub. ex: [ECS](https://aws.amazon.com/ecr/).
 ```
 $ export password="dockerhub_password" && user="dockerhub_username" && name="dockerhub_name"
