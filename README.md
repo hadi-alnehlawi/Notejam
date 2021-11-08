@@ -83,8 +83,11 @@ This building step would be part of a **Continuous Integation** pipeline. We are
 * We can test the container applicaiton by update the `ENV` and the runn the command
 ```
 $ cd app
-$ export POSTGRES_HOST=your_aws_rds_uri
-$ export DB_URI="postgresql://postgres:postgres@$POSTGRES_HOST/postgres"
+$ export DB_USER=your_aws_rds_user
+$ export DB_PASS=your_aws_rds_pass
+$ export DB_HOST=your_aws_rds_endpoint
+$ export DB_PORT=your_aws_rds_port
+$ export DB_NAME=your_aws_rds_name
 $ docker build -t notejam .
 $ docker run -it --network host -p 5000 -e DB_URI=$DB_URI notejam
 ```
