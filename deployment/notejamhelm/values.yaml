@@ -13,20 +13,13 @@ app:
   port: 5000
   replica: 3
   name: notejam
-  db_user: postgres
-  db_pass: postgres
-  db_name: postgres
-  db_port: 5432
-  db_host: localhost
-
-
-
-ENV DB_USER="postgres"
-ENV DB_PASS="postgres"
-ENV DB_NAME="postgres"
-ENV DB_PORT="5432"
-ENV DB_HOST="localhost"
 service:
   name: notejamsvc
   type: LoadBalancer
   port: 80
+db:
+  user: postgres
+  pass: postgres
+  name: postgres
+  port: 5432
+  host: localhost
