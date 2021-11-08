@@ -2,7 +2,7 @@
 Notejam applicaiton was first created as monolith and this project's goal to re-design it as microservice running on cloud. It would be more scalable, high available and automatically scale up/down with out-of-the-box networking and security integrations.
 ### Technology Stack ###
 We choose to run the applicaiton on AWS cloud providers for many factors. Scalabiltiy and flexibility are the most important factors. In the below a list of technology stacks used in the project:
-* [Flask](https://flask.palletsprojects.com/en/2.0.x/): A micro web framework written in Python
+* [Flask](https://flask.palletsprojects.com/en/2.0.x/): A micro web framework written in Python.
 * [Docker](https://www.docker.com/): We cannot think of microservice without mentioning docker. The whole concept of construct any microservice application is building it as contianers and the poineer technology to achiver this goal is Docker.
 * [EKS](https://aws.amazon.com/eks/): It is the most trusted way to start, run and scal Kubernetes. At the end we are going to create an application that automatically scale up/down and run in a high availability configuraiotn.
 * [RDS](https://aws.amazon.com/rds/?p=pm&c=db&z=3): Amazon Relational Database Service makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups.
