@@ -38,7 +38,7 @@ The new application would be containerized to run on AWS and use its kubernetes 
 The Application must serve variable amount of traffic. Most users are active during business hours. During big
 events and conferences the traffic could be 4 times more than typical.
 * Autoscalling is configured to a production clustser that is supposedly configured to read the metric data of connection from prometheis and set the thredshold based on the noraml connection data time.
-* A **lambda function** is triggered by a **EventBridge** on a specific time (Daily at 12 AM UTC) to create a snapshot of the database.
+* A **Lambda Function** is triggered by a **EventBridge** on a specific time (Daily at 12 AM UTC) to create a snapshot of the database.
 * Once the sanpshort is created, another lambda function is triggerd as well by EventBridge and export it to a **S3 bucket** called `notejamsnapshot`.
 * This bucket has a lifecyle period for 3 years.
 * Prometheus service is installed on the cluster to aggregate the metrics about the kubernetes and the infrastrcure.
