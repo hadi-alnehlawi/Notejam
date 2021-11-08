@@ -23,10 +23,6 @@ spec:
       containers:
       - name: {{ .Values.app.name }}
         image: {{ .Values.app.image }}:{{ .Values.app.tag }}
-        # livenessProbe:
-        #   httpGet:
-        #     path: /health
-        #     port: {{ .Values.app.port }}
         imagePullPolicy: Always
         env:
           - name: DB_URI
