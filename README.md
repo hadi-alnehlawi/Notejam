@@ -21,8 +21,10 @@ The project consists of several steps with an acrynom for the first-five English
 Cluster
 ![Alt text](./cluster.jpeg?raw=true "Title")
 
+
 Database Backup
 ![Alt text](./backup.jpeg?raw=true "Title")
+
 
 CICD Pipline
 ![Alt text](./cicd.jpeg?raw=true "Title")
