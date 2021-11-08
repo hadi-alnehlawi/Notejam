@@ -99,7 +99,7 @@ $ docker push $name/notejam:latest
 # Deploying #
 This building step would be part of a **Continuous Deployment** pipeline.
 ### App ###
-* Before deploy our custom helm chart, It is required to set the values
+* Prio deploying our custom helm chart, It is required to set its values.
 ```
 $ cat ./deployment/notejamhelm/values.yaml
 $ ## db_value: The postgre database values which is created in [Creating] step earlier
