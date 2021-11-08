@@ -12,7 +12,7 @@ We choose to run the applicaiton on AWS cloud providers for many factors. Scalab
 * [Prometheus](https://prometheus.io/): A monitoring system to records real-time metrics.
 * [CircleCI](https://circleci.com): Continous Integration / Continous Development (CI/CD) is the most important tool to achive DevOps culture in delivering any software. The hot label which could brief the benefit of CI/CD tool is *fail fast and repair fast*. One of the poineer tool is circleci to build a faster deployement jobs on robut cloud servers. Finally, have more than 100 developers to work in this project and who want to roll out multiple deployments a day without interruption / downtime would be impossible without using the CI/CD piplines.
 
-The project consists of several steps with an acrynom for the first-five English letters **ABCDE**:
+The project consists of several steps with an acrynom for the first-five English letters **A-B-C-D-E**:
 - **A**rchitecting
 - **B**uilding
 - **C**reating
