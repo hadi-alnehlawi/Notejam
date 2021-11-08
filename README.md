@@ -72,7 +72,7 @@ The above commands build the whole infrastructure which is needed to have the ap
 * RDS - postgres database.
 * S3 Bucket - store the db backup files for 3 years.
 * Lambda Functions - take database snapshots and export it to s3 bucket.
-* EventBridge: to scheudle the lambda fucntion to conduct a snapt shot and export it to S3 bucket.
+* EventBridge - to scheudle the lambda fucntion to conduct a snapt shot and export it to S3 bucket.
 * EKS Clusters - three k8s clusters: developments - staging - produciton.
 # Creating #
 This building step would be part of a **Continuous Integation** pipeline. We are going to build the application to run on k8s cluster. In other words, build the appilcation as a contianer and push it to a registery:
