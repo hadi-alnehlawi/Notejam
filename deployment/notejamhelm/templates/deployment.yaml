@@ -25,8 +25,16 @@ spec:
         image: {{ .Values.app.image }}:{{ .Values.app.tag }}
         imagePullPolicy: Always
         env:
-          - name: DB_URI
-            value: "{{.Values.app.DB_URI}}"
+          - name: DB_USER
+            value: "{{.Values.app.DB_USER}}"
+          - name: DB_PASS
+            value: "{{.Values.app.DB_PASS}}"
+          - name: DB_NAME
+            value: "{{.Values.app.DB_NAME}}"
+          - name: DB_PORT
+            value: "{{.Values.app.DB_PORT}}"
+          - name: DB_HOST
+            value: "{{.Values.app.DB_HOST}}"
         ports:
         - containerPort:  {{ .Values.app.port }}
           protocol: TCP
