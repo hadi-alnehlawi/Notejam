@@ -98,7 +98,7 @@ $ docker push $name/notejam:latest
 ```
 # Deploying #
 This building step would be part of a **Continuous Deployment** pipeline.
-### Apps ###
+### App ###
 * Before deploy our custom helm chart, It is required to set the values
 ```
 $ cat ./deployment/notejamhelm/values.yaml
