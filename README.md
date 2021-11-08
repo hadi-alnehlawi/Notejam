@@ -1,5 +1,5 @@
 # Introduction #
-Notejam applicaiton was first created as monolith and this project goal is to re-design it as microservice running on cloud. It would be more scalable, high available and automatically scale up/down with out-of-the-box networking and security integrations.
+Notejam applicaiton was first created as monolith and this project's goal to re-design it as microservice running on cloud. It would be more scalable, high available and automatically scale up/down with out-of-the-box networking and security integrations.
 ### Technology Stack ###
 We choose to run the applicaiton on AWS cloud providers for many factors. In my opinion, scalabiltiy and flexibility are the most important factors. In the below a list of AWS services and DevOps tools used in the project:
 * [FLASK](https://flask.palletsprojects.com/en/2.0.x/): A micro web framework written in Python
