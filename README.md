@@ -23,6 +23,9 @@ Cluster
 
 Database Backup
 ![Alt text](./backup.jpeg?raw=true "Title")
+
+CICD Pipline
+![cicd.jpeg](./cicd.)
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
 * The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
 * Initially the application is running on three EKS clusters:
