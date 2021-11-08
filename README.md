@@ -154,7 +154,7 @@ As a last step of this project we need to set up the CI/CD system (CircleCI) whi
 * Verify: Create a confidence and run smoke tests.
 * Promote: Trigger the green light of the new release.
 
-The pipline is defined in the cofnigration file:
+An example of the pipline is defined in the cofnigration file:
 ```
 $ cd ./.circleci/
 $ cat config.yml
