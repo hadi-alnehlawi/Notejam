@@ -19,11 +19,11 @@ The project consists of several steps with an acrynom for the first-five English
 5. **E**stablishing
 # Architecting #
 Cluster
-![Alt text](./cluster.jpeg?raw=true "EKS Cluster Diagram")
+![Alt text](./cluster.jpeg?raw=true "EKS Cluster")
 Database Backup
-![Alt text](./backup.jpeg?raw=true "Title")
+![Alt text](./backup.jpeg?raw=true "Postgres DB Backup $ Retension")
 CICD Pipline
-![Alt text](./cicd.jpeg?raw=true "Title")
+![Alt text](./cicd.jpeg?raw=true "Circle CI/CD Piplines")
 The new application would be containerized to run on AWS and use its kubernetes cluster technology **AWS EKS**.
 * The applicaiton is now using **PostgreSQL** backend db instead of SQLite for many reasons, ex: speed, functionality, realibiltiy..etc. However the most import feature that it is running as managed service on AWS and would be much easire for backup and retention.
 * Initially the application is running on three EKS clusters:
