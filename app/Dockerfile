@@ -1,4 +1,3 @@
-# start from base
 FROM python:3.8.10
 LABEL maintainer="HADI ALNEHLAWI nhadi82@hotmail.com"
 COPY ./requirements.txt /app/requirements.txt
