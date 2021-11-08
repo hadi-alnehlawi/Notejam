@@ -102,7 +102,7 @@ This building step would be part of a **Continuous Deployment** pipeline.
 * Prio deploying our custom helm chart, It is required to set its values.
 ```
 $ cat ./deployment/notejamhelm/values.yaml
-$ ## db_value: The postgre database values which is created in [Creating] step earlier
+$ ## db.host: The postgre database hostname which is created in [Creating] step earlier
 $ ## replica: the numbers of pod replica which is going to be different from environment to another. ex: production:3 , developement:1
 ```
 * Install the helm chart tempalte `notejamehelm` into our new produciton cluster.
