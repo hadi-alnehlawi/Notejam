@@ -15,3 +15,43 @@ jobs:
       - run:
           name: build jobs
           command: exit 0;
+  test:
+    docker:
+      - image: circleci/python:3.8.10
+    steps:
+      - checkout
+      - run:
+          name: test jobs
+          command: exit 0;
+  release:
+    docker:
+      - image: circleci/python:3.8.10
+    steps:
+      - checkout
+      - run:
+          name: release jobs
+          command: exit 0;
+  deploy:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: deploy jobs
+          command: exit 0;
+  verify:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: smoke test jobs
+          command: exit 0;
+  promote:
+    docker:
+      - image: alpine:latest
+    steps:
+      - checkout
+      - run:
+          name: apply to proudcitons jobs
+          command: exit 0;
