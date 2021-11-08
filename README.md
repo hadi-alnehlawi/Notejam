@@ -76,7 +76,7 @@ The above commands build the whole infrastructure which is needed to have the ap
 # Creating #
 This building step would be part of a **Continuous Integation** pipeline. We are going to build the application to run on k8s cluster. In other words, build the appilcation as a contianer and push it to a registery:
 * The file `Dockerfile` is created to contains all the commands to be executed to build the container.
-* Database URL parameters are configured as dockert environement varaiables and created in build step.
+* Database URL parameters are configured as dockert environement varaiables and created in the build step.
 * We can test the container applicaiton by update the `ENV` and the runn the command
 ```
 $ cd app
