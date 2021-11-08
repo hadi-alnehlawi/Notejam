@@ -153,6 +153,3 @@ As a last step of this project we need to set up the CI/CD system (CircleCI) whi
 * Deploy: build up the AWS resources for a this deployment.
 * Verify: Create a confidence and run smoke tests.
 * Promote: Trigger the green light of the new release.
-
-
-
