@@ -146,10 +146,16 @@ $ kubectl get pods -n prometheus
 ```
 
 # Establishing #
-As a last step of this project we need to set up the CI/CD system (CircleCI) which is going to define the below steps:
+As a last step of this project we need to set up the CI/CD system (CircleCI) which is going to define the below steps
 * Build: create the docker images.
 * Test: conduct tests on the application.
 * Release: push the docker images into container registery
 * Deploy: build up the AWS resources for a this deployment.
 * Verify: Create a confidence and run smoke tests.
 * Promote: Trigger the green light of the new release.
+
+The pipline is defined in the cofnigration file:
+```
+$ cd ./.circleci/
+$ cat config.yml
+```
